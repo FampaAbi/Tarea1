@@ -23,8 +23,9 @@ typedef struct{ //Struct de tipo TipoAlumno que contiene:
 
 void * LeerBinario(char * nomarch, int*m){ //Función que recibe como parámetro
   #define N curso //el nombre del archivo y un puntero entero, y retorna un puntero
-	if (nomarch != "cursos.dat"){ //a un array de tipo 
+	if (nomarch != "cursos.dat"){ //a un array de tipo
     #undef N
+
     #define N nota
 	}
   FILE *fp = fopen(nomarch,"r");
@@ -65,12 +66,22 @@ int main(){ // NO OLVIDAR FREE A LA MEMORIA
     curso *ramos=LeerBinario("cursos.dat", &cantidadRamos);
     nota *notas=LeerBinario("notas.dat", &cantidadNotas);
 		TipoAlumnos *alumno=LeerAscii("alumnos.txt",&cantidadRoles);
+
     typedef struct{
       char ramo[7];
       int nota;
     }TipoNotaRamo;
+
     FILE *aprobadosS1 = fopen("aprobados-s1.txt","w");
     FILE *aprobadosS2 = fopen("aprobados-s2.txt","w");
+    if (aprobadosS1==NULL){
+  			printf("Error al abrir el archivo\n");
+  			exit(1);
+  	}
+    if (aprobadosS2==NULL){
+  			printf("Error al abrir el archivo\n");
+  			exit(1);
+  	}
     for (int l = 0; l < cantidadRoles ; l++)
     {
       TipoNotaRamo ramosSemestre1[cantidadRamos],ramosSemestre2[cantidadRamos];
